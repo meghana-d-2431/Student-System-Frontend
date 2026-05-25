@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Container, Paper, Button, TextField } from "@mui/material";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:9090";
+
 export default function Student() {
   const paperStyle = {
     padding: "50px 20px",
@@ -17,7 +19,7 @@ export default function Student() {
 
     const student = { name, address };
 
-    fetch("http://localhost:9090/student/add", {
+    fetch(`${API_BASE_URL}/student/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(student),
@@ -30,7 +32,7 @@ export default function Student() {
   };
 
   const fetchStudents = () => {
-    fetch("http://localhost:9090/student/getAll")
+    fetch(`${API_BASE_URL}/student/getAll`)
       .then((res) => res.json())
       .then((result) => setStudents(result));
   };
